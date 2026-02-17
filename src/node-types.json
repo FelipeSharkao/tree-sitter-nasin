@@ -76,6 +76,10 @@
             "named": true
           },
           {
+            "type": "double_plus",
+            "named": true
+          },
+          {
             "type": "double_star",
             "named": true
           },
@@ -973,6 +977,10 @@
   },
   {
     "type": "double_lt",
+    "named": true
+  },
+  {
+    "type": "double_plus",
     "named": true
   },
   {
