@@ -964,6 +964,10 @@
     "named": true
   },
   {
+    "type": "comment",
+    "named": true
+  },
+  {
     "type": "dot",
     "named": true
   },

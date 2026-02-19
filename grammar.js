@@ -24,7 +24,7 @@ const PREC = {
 module.exports = grammar({
     name: "nasin",
     word: ($) => $._ident,
-    extras: ($) => [$._whitespace, $._comment],
+    extras: ($) => [$._whitespace, $.comment],
     rules: {
         root: ($) => seq(optional($._newline), sep($._newline, $._module_stmt)),
 
@@ -387,9 +387,9 @@ module.exports = grammar({
         number: () => prec(PREC.ATOM, /(\d(_?\d)*)?\.?\d(_?\d)*/),
 
         _whitespace: () => /[ \t]+/,
-        _newline: () => /(\r?\n)+/,
+        _newline: () => prec.left(repeat1(/(\r?\n)+/)),
 
-        _comment: () => /;[^\n]*/,
+        comment: () => /;[^\n]*/,
     },
 })
 

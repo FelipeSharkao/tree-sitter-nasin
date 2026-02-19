@@ -101,3 +101,5 @@
 )
 
 (interface_type "interface" @keyword.type)
+
+(comment) @comment

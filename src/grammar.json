@@ -3406,10 +3406,17 @@
       "value": "[ \\t]+"
     },
     "_newline": {
-      "type": "PATTERN",
-      "value": "(\\r?\\n)+"
+      "type": "PREC_LEFT",
+      "value": 0,
+      "content": {
+        "type": "REPEAT1",
+        "content": {
+          "type": "PATTERN",
+          "value": "(\\r?\\n)+"
+        }
+      }
     },
-    "_comment": {
+    "comment": {
       "type": "PATTERN",
       "value": ";[^\\n]*"
     }
@@ -3421,7 +3428,7 @@
     },
     {
       "type": "SYMBOL",
-      "name": "_comment"
+      "name": "comment"
     }
   ],
   "conflicts": [],
