@@ -32,7 +32,6 @@
 ] @operator
  
 [
- ";"
  ","
  (dot)
 ] @punctuation.delimiter
