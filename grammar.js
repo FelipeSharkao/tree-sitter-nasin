@@ -286,14 +286,6 @@ module.exports = grammar({
                     "[",
                     optional($._newline),
                     field("item_type", $.type_expr),
-                    optional(
-                        seq(
-                            optional($._newline),
-                            "*",
-                            optional($._newline),
-                            field("length", $.number),
-                        ),
-                    ),
                     optional($._newline),
                     "]",
                 ),
