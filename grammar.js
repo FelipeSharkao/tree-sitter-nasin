@@ -28,7 +28,10 @@ module.exports = grammar({
     rules: {
         root: ($) => seq(optional($._newline), sep($._newline, $._module_stmt)),
 
-        _module_stmt: ($) => choice($.func_decl, $.global_decl, $.type_decl),
+        _module_stmt: ($) =>
+            choice($.func_decl, $.global_decl, $.type_decl, $.typevar_decl),
+
+        typevar_decl: ($) => seq("typevar", field("name", $.ident)),
 
         func_decl: ($) =>
             seq(
@@ -372,6 +375,7 @@ module.exports = grammar({
 
         // Keywords
         let: () => prec(PREC.KEYWORD, "let"),
+        typevar: () => prec(PREC.KEYWORD, "typevar"),
         true: () => prec(PREC.KEYWORD, "true"),
         false: () => prec(PREC.KEYWORD, "false"),
         not: () => prec(PREC.KEYWORD, "not"),

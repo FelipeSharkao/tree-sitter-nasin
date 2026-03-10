@@ -74,6 +74,27 @@
         {
           "type": "SYMBOL",
           "name": "type_decl"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "typevar_decl"
+        }
+      ]
+    },
+    "typevar_decl": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "typevar"
+        },
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "ident"
+          }
         }
       ]
     },
@@ -3318,6 +3339,14 @@
       "content": {
         "type": "STRING",
         "value": "let"
+      }
+    },
+    "typevar": {
+      "type": "PREC",
+      "value": 15,
+      "content": {
+        "type": "STRING",
+        "value": "typevar"
       }
     },
     "true": {

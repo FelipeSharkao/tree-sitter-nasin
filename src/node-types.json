@@ -759,6 +759,10 @@
         {
           "type": "type_decl",
           "named": true
+        },
+        {
+          "type": "typevar_decl",
+          "named": true
         }
       ]
     }
@@ -881,6 +885,22 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "typevar_decl",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "ident",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -1059,6 +1079,10 @@
   },
   {
     "type": "type",
+    "named": false
+  },
+  {
+    "type": "typevar",
     "named": false
   },
   {
