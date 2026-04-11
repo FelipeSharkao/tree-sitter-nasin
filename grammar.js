@@ -309,6 +309,7 @@ module.exports = grammar({
             seq(
                 "type",
                 field("name", $.ident),
+                optional($._type_decl_params),
                 optional(
                     seq(
                         token_with_nl(":"),
@@ -317,6 +318,13 @@ module.exports = grammar({
                     ),
                 ),
                 field("body", $._type_decl_body),
+            ),
+        _type_decl_params: ($) =>
+            seq(
+                "(",
+                optional($._newline),
+                sep(or_nl(",", $._newline), field("params", $.ident)),
+                ")",
             ),
         _type_decl_body: ($) => choice($.record_type, $.interface_type),
 
