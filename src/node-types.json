@@ -978,6 +978,10 @@
         "required": true,
         "types": [
           {
+            "type": "minus",
+            "named": true
+          },
+          {
             "type": "not",
             "named": true
           }

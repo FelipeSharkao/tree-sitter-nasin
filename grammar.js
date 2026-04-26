@@ -154,7 +154,11 @@ module.exports = grammar({
                 $.if,
             ),
 
-        un_op: ($) => choice(un_op(PREC.UNARY, seq($.not, optional($._newline)), $.expr)),
+        un_op: ($) =>
+            choice(
+                un_op(PREC.UNARY, seq($.not, optional($._newline)), $.expr),
+                un_op(PREC.UNARY, seq($.minus, optional($._newline)), $.expr),
+            ),
 
         bin_op: ($) =>
             choice(
