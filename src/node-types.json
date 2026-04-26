@@ -356,6 +356,16 @@
           }
         ]
       },
+      "parent": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "ident",
+            "named": true
+          }
+        ]
+      },
       "ret_type": {
         "multiple": false,
         "required": false,
@@ -376,6 +386,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "dot",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -393,6 +413,52 @@
         ]
       },
       "type": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "type_expr",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "func_sig",
+    "named": true,
+    "fields": {
+      "directives": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "directive",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "ident",
+            "named": true
+          }
+        ]
+      },
+      "params": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "func_param",
+            "named": true
+          }
+        ]
+      },
+      "ret_type": {
         "multiple": false,
         "required": false,
         "types": [
@@ -552,7 +618,7 @@
         "required": false,
         "types": [
           {
-            "type": "func_decl",
+            "type": "func_sig",
             "named": true
           }
         ]
@@ -698,16 +764,6 @@
         "types": [
           {
             "type": "record_type_field",
-            "named": true
-          }
-        ]
-      },
-      "methods": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "func_decl",
             "named": true
           }
         ]

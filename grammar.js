@@ -35,10 +35,8 @@ module.exports = grammar({
 
         func_decl: ($) =>
             seq(
-                field("name", $.ident),
-                $._func_params,
-                optional($._func_ret_type),
-                repeat(field("directives", $.directive)),
+                optional(seq(field("parent", $.ident), $.dot, optional($._newline))),
+                $._func_sig,
                 optional(
                     seq(
                         token_with_nl("="),
@@ -46,6 +44,15 @@ module.exports = grammar({
                         field("return", $.expr),
                     ),
                 ),
+            ),
+
+        func_sig: ($) => $._func_sig,
+        _func_sig: ($) =>
+            seq(
+                field("name", $.ident),
+                $._func_params,
+                optional($._func_ret_type),
+                repeat(field("directives", $.directive)),
             ),
         _func_params: ($) =>
             seq(
@@ -332,13 +339,7 @@ module.exports = grammar({
             seq(
                 "{",
                 optional($._newline),
-                sep(
-                    or_nl(",", $._newline),
-                    choice(
-                        field("fields", $.record_type_field),
-                        field("methods", $.func_decl),
-                    ),
-                ),
+                sep(or_nl(",", $._newline), field("fields", $.record_type_field)),
                 "}",
             ),
         record_type_field: ($) =>
@@ -354,7 +355,7 @@ module.exports = grammar({
                 "interface",
                 "{",
                 optional($._newline),
-                sep(or_nl(",", $._newline), field("methods", $.func_decl)),
+                sep(or_nl(",", $._newline), field("methods", $.func_sig)),
                 "}",
             ),
 

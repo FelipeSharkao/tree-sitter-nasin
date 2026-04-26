@@ -102,23 +102,36 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "FIELD",
-          "name": "name",
-          "content": {
-            "type": "SYMBOL",
-            "name": "ident"
-          }
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_func_params"
-        },
-        {
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "_func_ret_type"
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "FIELD",
+                  "name": "parent",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "ident"
+                  }
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "dot"
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "_newline"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                }
+              ]
             },
             {
               "type": "BLANK"
@@ -126,15 +139,8 @@
           ]
         },
         {
-          "type": "REPEAT",
-          "content": {
-            "type": "FIELD",
-            "name": "directives",
-            "content": {
-              "type": "SYMBOL",
-              "name": "directive"
-            }
-          }
+          "type": "SYMBOL",
+          "name": "_func_sig"
         },
         {
           "type": "CHOICE",
@@ -172,6 +178,50 @@
               "type": "BLANK"
             }
           ]
+        }
+      ]
+    },
+    "func_sig": {
+      "type": "SYMBOL",
+      "name": "_func_sig"
+    },
+    "_func_sig": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "ident"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_func_params"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_func_ret_type"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "FIELD",
+            "name": "directives",
+            "content": {
+              "type": "SYMBOL",
+              "name": "directive"
+            }
+          }
         }
       ]
     },
@@ -3081,25 +3131,12 @@
               "type": "SEQ",
               "members": [
                 {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "FIELD",
-                      "name": "fields",
-                      "content": {
-                        "type": "SYMBOL",
-                        "name": "record_type_field"
-                      }
-                    },
-                    {
-                      "type": "FIELD",
-                      "name": "methods",
-                      "content": {
-                        "type": "SYMBOL",
-                        "name": "func_decl"
-                      }
-                    }
-                  ]
+                  "type": "FIELD",
+                  "name": "fields",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "record_type_field"
+                  }
                 },
                 {
                   "type": "REPEAT",
@@ -3174,25 +3211,12 @@
                         "type": "CHOICE",
                         "members": [
                           {
-                            "type": "CHOICE",
-                            "members": [
-                              {
-                                "type": "FIELD",
-                                "name": "fields",
-                                "content": {
-                                  "type": "SYMBOL",
-                                  "name": "record_type_field"
-                                }
-                              },
-                              {
-                                "type": "FIELD",
-                                "name": "methods",
-                                "content": {
-                                  "type": "SYMBOL",
-                                  "name": "func_decl"
-                                }
-                              }
-                            ]
+                            "type": "FIELD",
+                            "name": "fields",
+                            "content": {
+                              "type": "SYMBOL",
+                              "name": "record_type_field"
+                            }
                           },
                           {
                             "type": "BLANK"
@@ -3286,7 +3310,7 @@
                   "name": "methods",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "func_decl"
+                    "name": "func_sig"
                   }
                 },
                 {
@@ -3366,7 +3390,7 @@
                             "name": "methods",
                             "content": {
                               "type": "SYMBOL",
-                              "name": "func_decl"
+                              "name": "func_sig"
                             }
                           },
                           {
