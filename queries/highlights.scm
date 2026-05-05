@@ -71,7 +71,10 @@
 
 (get_prop prop_name: (ident) @property)
 
-(func_decl name: (ident) @function)
+(func_decl
+ name: (ident) @function
+ parent: (ident) @type
+)
 
 (macro name: (ident) @function.macro.call)
 
@@ -96,8 +99,8 @@
 ])
 
 (type_decl
-  "type" @keyword.type
-  name: (ident) @type.declaration
+ "type" @keyword.type
+ name: (ident) @type.declaration
 )
 
 (interface_type "interface" @keyword.type)
