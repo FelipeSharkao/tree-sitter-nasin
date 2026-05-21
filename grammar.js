@@ -1,24 +1,25 @@
 /// <reference types="./node_modules/tree-sitter-cli/dsl.d.ts" />
 
 const PREC = {
-    IF: 0,
-    BLOCK: 1,
-    BLOCK_BODY: 2,
-    LOGICAL: 3,
-    CONCAT: 4,
-    BIT_OR: 5,
-    BIT_AND: 6,
-    BIT_SHIFT: 7,
-    SUM: 8,
-    MUL: 9,
-    POW: 10,
-    TYPE_BIND: 11,
-    UNARY: 12,
-    ATOM: 13,
-    GET_PROP: 14,
-    KEYWORD: 15,
-    CALL: 16,
-    INSTANCE: 17,
+    DECLARATION: 0,
+    IF: 1,
+    BLOCK: 2,
+    BLOCK_BODY: 3,
+    LOGICAL: 4,
+    CONCAT: 5,
+    BIT_OR: 6,
+    BIT_AND: 7,
+    BIT_SHIFT: 8,
+    SUM: 9,
+    MUL: 10,
+    POW: 11,
+    TYPE_BIND: 12,
+    UNARY: 13,
+    ATOM: 14,
+    GET_PROP: 15,
+    KEYWORD: 16,
+    CALL: 17,
+    INSTANCE: 18,
 }
 
 module.exports = grammar({
@@ -29,9 +30,11 @@ module.exports = grammar({
         root: ($) => seq(optional($._newline), sep($._newline, $._module_stmt)),
 
         _module_stmt: ($) =>
-            choice($.func_decl, $.global_decl, $.type_decl, $.typevar_decl),
+            choice($.func_decl, $.global_decl, $.type_decl, $.typevar_decl, $.impl_decl),
 
         typevar_decl: ($) => seq("typevar", field("name", $.ident)),
+
+        impl_decl: ($) => seq("impl", field("name", $.ident), $._type_impl),
 
         func_decl: ($) =>
             seq(
@@ -62,24 +65,18 @@ module.exports = grammar({
                 ")",
             ),
         _func_ret_type: ($) =>
-            seq(token_with_nl(":"), optional($._newline), field("ret_type", $.type_expr)),
+            seq($.colon, optional($._newline), field("ret_type", $.type_expr)),
 
         func_param: ($) =>
             seq(
                 field("pat", $._pat),
-                optional(seq(":", optional($._newline), field("type", $.type_expr))),
+                optional(seq($.colon, optional($._newline), field("type", $.type_expr))),
             ),
 
         global_decl: ($) =>
             seq(
                 field("name", $.ident),
-                optional(
-                    seq(
-                        token_with_nl(":"),
-                        optional($._newline),
-                        field("type", $.type_expr),
-                    ),
-                ),
+                optional(seq($.colon, optional($._newline), field("type", $.type_expr))),
                 token_with_nl("="),
                 optional($._newline),
                 field("value", $.expr),
@@ -90,13 +87,7 @@ module.exports = grammar({
                 $.let,
                 optional($._newline),
                 field("pat", $._pat),
-                optional(
-                    seq(
-                        token_with_nl(":"),
-                        optional($._newline),
-                        field("type", $.type_expr),
-                    ),
-                ),
+                optional(seq($.colon, optional($._newline), field("type", $.type_expr))),
                 token_with_nl("="),
                 optional($._newline),
                 field("value", $.expr),
@@ -321,13 +312,7 @@ module.exports = grammar({
                 "type",
                 field("name", $.ident),
                 optional($._type_decl_params),
-                optional(
-                    seq(
-                        token_with_nl(":"),
-                        optional($._newline),
-                        field("assertion", $.type_expr),
-                    ),
-                ),
+                optional($._type_impl),
                 field("body", $._type_decl_body),
             ),
         _type_decl_params: ($) =>
@@ -339,6 +324,16 @@ module.exports = grammar({
             ),
         _type_decl_body: ($) => choice($.record_type, $.interface_type),
 
+        _type_impl: ($) =>
+            prec.right(
+                PREC.DECLARATION,
+                seq(
+                    $.colon,
+                    optional($._newline),
+                    sep($.plus, field("implements", $.type_expr)),
+                ),
+            ),
+
         record_type: ($) =>
             seq(
                 "{",
@@ -349,7 +344,7 @@ module.exports = grammar({
         record_type_field: ($) =>
             seq(
                 field("name", $.ident),
-                token_with_nl(":"),
+                $.colon,
                 optional($._newline),
                 field("type", $.type_expr),
             ),
@@ -388,7 +383,7 @@ module.exports = grammar({
 
         // Keywords
         let: () => prec(PREC.KEYWORD, "let"),
-        typevar: () => prec(PREC.KEYWORD, "typevar"),
+        impl: () => prec(PREC.KEYWORD, "impl"),
         true: () => prec(PREC.KEYWORD, "true"),
         false: () => prec(PREC.KEYWORD, "false"),
         not: () => prec(PREC.KEYWORD, "not"),

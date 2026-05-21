@@ -16,7 +16,11 @@
       },
       "peerDependencies": {
         "tree-sitter": "^0.21.1",
+        "tree_sitter": "*",
       },
+      "optionalPeers": [
+        "tree_sitter",
+      ],
     },
   },
   "packages": {

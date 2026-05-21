@@ -184,11 +184,6 @@
     }
   },
   {
-    "type": "colon",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "directive",
     "named": true,
     "fields": {
@@ -388,9 +383,13 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "colon",
+          "named": true
+        },
         {
           "type": "dot",
           "named": true
@@ -422,6 +421,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "colon",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -468,6 +477,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "colon",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -566,6 +585,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "colon",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -607,6 +636,46 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "impl_decl",
+    "named": true,
+    "fields": {
+      "implements": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "type_expr",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "ident",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "colon",
+          "named": true
+        },
+        {
+          "type": "plus",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -666,9 +735,13 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "colon",
+          "named": true
+        },
         {
           "type": "let",
           "named": true
@@ -794,6 +867,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "colon",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -810,6 +893,10 @@
         },
         {
           "type": "global_decl",
+          "named": true
+        },
+        {
+          "type": "impl_decl",
           "named": true
         },
         {
@@ -884,16 +971,6 @@
     "type": "type_decl",
     "named": true,
     "fields": {
-      "assertion": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "type_expr",
-            "named": true
-          }
-        ]
-      },
       "body": {
         "multiple": false,
         "required": true,
@@ -904,6 +981,16 @@
           },
           {
             "type": "record_type",
+            "named": true
+          }
+        ]
+      },
+      "implements": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "type_expr",
             "named": true
           }
         ]
@@ -928,6 +1015,20 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "colon",
+          "named": true
+        },
+        {
+          "type": "plus",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1016,10 +1117,6 @@
     "named": false
   },
   {
-    "type": ":",
-    "named": false
-  },
-  {
     "type": "=",
     "named": false
   },
@@ -1037,6 +1134,10 @@
   },
   {
     "type": "ampersand",
+    "named": true
+  },
+  {
+    "type": "colon",
     "named": true
   },
   {
@@ -1085,6 +1186,10 @@
   },
   {
     "type": "if",
+    "named": false
+  },
+  {
+    "type": "impl",
     "named": false
   },
   {

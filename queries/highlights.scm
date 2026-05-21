@@ -105,4 +105,14 @@
 
 (interface_type "interface" @keyword.type)
 
+(typevar_decl
+ "typevar" @keyword.type
+ name: (ident) @type.definition
+)
+
+(impl_decl
+ "impl" @keyword.type
+ name: (ident) @type
+)
+
 (comment) @comment
