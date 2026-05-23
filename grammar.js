@@ -26,6 +26,7 @@ module.exports = grammar({
     name: "nasin",
     word: ($) => $._ident,
     extras: ($) => [$._whitespace, $.comment],
+    conflicts: ($) => [[$.type_expr, $._pat]],
     rules: {
         root: ($) => seq(optional($._newline), sep($._newline, $._module_stmt)),
 
@@ -34,11 +35,11 @@ module.exports = grammar({
 
         typevar_decl: ($) => seq("typevar", field("name", $.ident)),
 
-        impl_decl: ($) => seq("impl", field("name", $.ident), $._type_impl),
+        impl_decl: ($) => seq("impl", field("type", $.type_expr), $._type_impl),
 
         func_decl: ($) =>
             seq(
-                optional(seq(field("parent", $.ident), $.dot, optional($._newline))),
+                optional(seq(field("parent", $.type_expr), $.dot, optional($._newline))),
                 $._func_sig,
                 optional(
                     seq(

@@ -356,7 +356,7 @@
         "required": false,
         "types": [
           {
-            "type": "ident",
+            "type": "type_expr",
             "named": true
           }
         ]
@@ -652,12 +652,12 @@
           }
         ]
       },
-      "name": {
+      "type": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "ident",
+            "type": "type_expr",
             "named": true
           }
         ]
