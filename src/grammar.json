@@ -111,10 +111,10 @@
         },
         {
           "type": "FIELD",
-          "name": "name",
+          "name": "type",
           "content": {
             "type": "SYMBOL",
-            "name": "ident"
+            "name": "type_expr"
           }
         },
         {
@@ -137,7 +137,7 @@
                   "name": "parent",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "ident"
+                    "name": "type_expr"
                   }
                 },
                 {
@@ -3697,7 +3697,12 @@
       "name": "comment"
     }
   ],
-  "conflicts": [],
+  "conflicts": [
+    [
+      "type_expr",
+      "_pat"
+    ]
+  ],
   "precedences": [],
   "externals": [],
   "inline": [],
