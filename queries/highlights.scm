@@ -30,7 +30,7 @@
  (colon)
  "="
 ] @operator
- 
+
 [
  ","
  (dot)
@@ -71,10 +71,7 @@
 
 (get_prop prop_name: (ident) @property)
 
-(func_decl
- name: (ident) @function
- parent: (ident) @type
-)
+(func_decl name: (ident) @variable @function)
 
 (macro name: (ident) @function.macro.call)
 
