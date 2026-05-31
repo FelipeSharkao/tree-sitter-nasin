@@ -39,7 +39,7 @@ module.exports = grammar({
 
         func_decl: ($) =>
             seq(
-                optional(seq(field("parent", $.type_expr), $._dot, optional($._newline))),
+                optional(seq(field("parent", $.type_expr), $.dot, optional($._newline))),
                 $._func_sig,
                 optional(
                     seq(
@@ -66,18 +66,18 @@ module.exports = grammar({
                 ")",
             ),
         _func_ret_type: ($) =>
-            seq($._colon, optional($._newline), field("ret_type", $.type_expr)),
+            seq($.colon, optional($._newline), field("ret_type", $.type_expr)),
 
         func_param: ($) =>
             seq(
                 field("pat", $._pat),
-                optional(seq($._colon, optional($._newline), field("type", $.type_expr))),
+                optional(seq($.colon, optional($._newline), field("type", $.type_expr))),
             ),
 
         global_decl: ($) =>
             seq(
                 field("name", $.ident),
-                optional(seq($._colon, optional($._newline), field("type", $.type_expr))),
+                optional(seq($.colon, optional($._newline), field("type", $.type_expr))),
                 token_with_nl("="),
                 optional($._newline),
                 field("value", $.expr),
@@ -88,7 +88,7 @@ module.exports = grammar({
                 $.let,
                 optional($._newline),
                 field("pat", $._pat),
-                optional(seq($._colon, optional($._newline), field("type", $.type_expr))),
+                optional(seq($.colon, optional($._newline), field("type", $.type_expr))),
                 token_with_nl("="),
                 optional($._newline),
                 field("value", $.expr),
@@ -179,7 +179,7 @@ module.exports = grammar({
                 PREC.TYPE_BIND,
                 seq(
                     field("value", $.expr),
-                    $._colon,
+                    $.colon,
                     optional($._newline),
                     field("type", $.type_expr),
                 ),
@@ -202,7 +202,7 @@ module.exports = grammar({
                 PREC.GET_PROP,
                 seq(
                     field("parent", $.expr),
-                    $._dot,
+                    $.dot,
                     optional($._newline),
                     field("prop_name", $.ident),
                 ),
@@ -343,7 +343,7 @@ module.exports = grammar({
             prec.right(
                 PREC.DECLARATION,
                 seq(
-                    $._colon,
+                    $.colon,
                     optional($._newline),
                     sep($.plus, field("implements", $.type_expr)),
                 ),
@@ -359,7 +359,7 @@ module.exports = grammar({
         record_type_field: ($) =>
             seq(
                 field("name", $.ident),
-                $._colon,
+                $.colon,
                 optional($._newline),
                 field("type", $.type_expr),
             ),
@@ -390,8 +390,8 @@ module.exports = grammar({
         lt: () => token_with_nl("<"),
         gt_eq: () => token_with_nl(">="),
         lt_eq: () => token_with_nl("<="),
-        _dot: () => token_with_nl("."),
-        _colon: () => token_with_nl(":"),
+        dot: () => token_with_nl("."),
+        colon: () => token_with_nl(":"),
 
         ident: ($) => prec(PREC.ATOM, $._ident),
         _ident: () => /[\p{L}_][\p{L}\p{Nd}_]*/u,

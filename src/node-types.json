@@ -385,6 +385,20 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "colon",
+          "named": true
+        },
+        {
+          "type": "dot",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -411,6 +425,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "colon",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -457,6 +481,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "colon",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -509,6 +543,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "dot",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -545,6 +589,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "colon",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -615,8 +669,12 @@
     },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
+        {
+          "type": "colon",
+          "named": true
+        },
         {
           "type": "plus",
           "named": true
@@ -707,9 +765,13 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "colon",
+          "named": true
+        },
         {
           "type": "let",
           "named": true
@@ -835,6 +897,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "colon",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -913,6 +985,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "colon",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -968,6 +1050,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "colon",
+          "named": true
+        },
         {
           "type": "plus",
           "named": true
@@ -1081,7 +1167,15 @@
     "named": true
   },
   {
+    "type": "colon",
+    "named": true
+  },
+  {
     "type": "comment",
+    "named": true
+  },
+  {
+    "type": "dot",
     "named": true
   },
   {

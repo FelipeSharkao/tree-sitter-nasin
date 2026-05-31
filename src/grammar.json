@@ -142,7 +142,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "_dot"
+                  "name": "dot"
                 },
                 {
                   "type": "CHOICE",
@@ -389,7 +389,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_colon"
+          "name": "colon"
         },
         {
           "type": "CHOICE",
@@ -432,7 +432,7 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "_colon"
+                  "name": "colon"
                 },
                 {
                   "type": "CHOICE",
@@ -482,7 +482,7 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "_colon"
+                  "name": "colon"
                 },
                 {
                   "type": "CHOICE",
@@ -572,7 +572,7 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "_colon"
+                  "name": "colon"
                 },
                 {
                   "type": "CHOICE",
@@ -1938,7 +1938,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "_colon"
+            "name": "colon"
           },
           {
             "type": "CHOICE",
@@ -2159,7 +2159,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "_dot"
+            "name": "dot"
           },
           {
             "type": "CHOICE",
@@ -3216,7 +3216,7 @@
         "members": [
           {
             "type": "SYMBOL",
-            "name": "_colon"
+            "name": "colon"
           },
           {
             "type": "CHOICE",
@@ -3429,7 +3429,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_colon"
+          "name": "colon"
         },
         {
           "type": "CHOICE",
@@ -3659,11 +3659,11 @@
       "type": "PATTERN",
       "value": "[ \\t\\f\\n\\r]*<="
     },
-    "_dot": {
+    "dot": {
       "type": "PATTERN",
       "value": "[ \\t\\f\\n\\r]*\\."
     },
-    "_colon": {
+    "colon": {
       "type": "PATTERN",
       "value": "[ \\t\\f\\n\\r]*:"
     },
