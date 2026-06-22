@@ -1088,6 +1088,16 @@
     "type": "typevar_decl",
     "named": true,
     "fields": {
+      "constraint": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "type_expr",
+            "named": true
+          }
+        ]
+      },
       "name": {
         "multiple": false,
         "required": true,
@@ -1098,6 +1108,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "colon",
+          "named": true
+        }
+      ]
     }
   },
   {

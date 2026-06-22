@@ -33,7 +33,14 @@ module.exports = grammar({
         _module_stmt: ($) =>
             choice($.func_decl, $.global_decl, $.type_decl, $.typevar_decl, $.impl_decl),
 
-        typevar_decl: ($) => seq("typevar", field("name", $.ident)),
+        typevar_decl: ($) =>
+            seq(
+                "typevar",
+                field("name", $.ident),
+                optional(
+                    seq($.colon, optional($._newline), field("constraint", $.type_expr)),
+                ),
+            ),
 
         impl_decl: ($) => seq("impl", field("type", $.type_expr), $._type_impl),
 
