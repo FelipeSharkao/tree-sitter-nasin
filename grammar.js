@@ -48,13 +48,7 @@ module.exports = grammar({
             seq(
                 optional(seq(field("parent", $.type_expr), $.dot, optional($._newline))),
                 $._func_sig,
-                optional(
-                    seq(
-                        token_with_nl("="),
-                        optional($._newline),
-                        field("return", $.expr),
-                    ),
-                ),
+                optional(seq($.eq, optional($._newline), field("return", $.expr))),
             ),
 
         func_sig: ($) => $._func_sig,
@@ -68,8 +62,13 @@ module.exports = grammar({
         _func_params: ($) =>
             seq(
                 "(",
-                optional($._newline),
-                sep(or_nl(",", $._newline), field("params", $.func_param)),
+                choice(
+                    $.void,
+                    seq(
+                        optional($._newline),
+                        sep1(or_nl(",", $._newline), field("params", $.func_param)),
+                    ),
+                ),
                 ")",
             ),
         _func_ret_type: ($) =>
@@ -85,7 +84,7 @@ module.exports = grammar({
             seq(
                 field("name", $.ident),
                 optional(seq($.colon, optional($._newline), field("type", $.type_expr))),
-                token_with_nl("="),
+                $.eq,
                 optional($._newline),
                 field("value", $.expr),
             ),
@@ -96,7 +95,7 @@ module.exports = grammar({
                 optional($._newline),
                 field("pat", $._pat),
                 optional(seq($.colon, optional($._newline), field("type", $.type_expr))),
-                token_with_nl("="),
+                $.eq,
                 optional($._newline),
                 field("value", $.expr),
             ),
@@ -107,7 +106,7 @@ module.exports = grammar({
             seq(
                 "(",
                 optional($._newline),
-                sep(or_nl(",", $._newline), field("args", $._directive_arg)),
+                sep1(or_nl(",", $._newline), field("args", $._directive_arg)),
                 ")",
             ),
         _directive_arg: ($) =>
@@ -197,12 +196,15 @@ module.exports = grammar({
             seq(
                 "(",
                 optional($._newline),
-                sep(or_nl(",", $._newline), field("args", $.expr)),
+                sep1(or_nl(",", $._newline), field("args", $.expr)),
                 ")",
             ),
 
         macro: ($) =>
-            prec.left(PREC.CALL, seq("@", field("name", $.ident), $._call_args)),
+            prec.right(
+                PREC.CALL,
+                seq("@", field("name", $.ident), optional($._call_args)),
+            ),
 
         get_prop: ($) =>
             prec.left(
@@ -264,7 +266,7 @@ module.exports = grammar({
             seq(
                 field("name", $.ident),
                 optional($._newline),
-                "=",
+                $.eq,
                 optional($._newline),
                 field("value", $.expr),
             ),
@@ -323,7 +325,7 @@ module.exports = grammar({
             seq(
                 "(",
                 optional($._newline),
-                sep(or_nl(",", $._newline), field("args", $.type_expr)),
+                sep1(or_nl(",", $._newline), field("args", $.type_expr)),
                 ")",
             ),
 
@@ -341,7 +343,7 @@ module.exports = grammar({
             seq(
                 "(",
                 optional($._newline),
-                sep(or_nl(",", $._newline), field("params", $.ident)),
+                sep1(or_nl(",", $._newline), field("params", $.ident)),
                 ")",
             ),
         _type_decl_body: ($) => choice($.record_type, $.interface_type),
@@ -391,6 +393,7 @@ module.exports = grammar({
         double_lt: () => token_with_nl("<<"),
         pipe: () => token_with_nl("|"),
         ampersand: () => token_with_nl("&"),
+        eq: () => token_with_nl("="),
         double_eq: () => token_with_nl("=="),
         not_eq: () => token_with_nl("!="),
         gt: () => token_with_nl(">"),
@@ -409,6 +412,7 @@ module.exports = grammar({
         true: () => prec(PREC.KEYWORD, "true"),
         false: () => prec(PREC.KEYWORD, "false"),
         not: () => prec(PREC.KEYWORD, "not"),
+        void: () => prec(PREC.KEYWORD, "void"),
 
         number: () => prec(PREC.ATOM, /(\d(_?\d)*)?\.?\d(_?\d)*/),
 

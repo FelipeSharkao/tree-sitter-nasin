@@ -163,7 +163,7 @@
     "fields": {
       "args": {
         "multiple": true,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "expr",
@@ -397,6 +397,14 @@
         {
           "type": "dot",
           "named": true
+        },
+        {
+          "type": "eq",
+          "named": true
+        },
+        {
+          "type": "void",
+          "named": true
         }
       ]
     }
@@ -483,11 +491,15 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
           "type": "colon",
+          "named": true
+        },
+        {
+          "type": "void",
           "named": true
         }
       ]
@@ -499,7 +511,7 @@
     "fields": {
       "args": {
         "multiple": true,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "type_expr",
@@ -591,11 +603,15 @@
       }
     },
     "children": {
-      "multiple": false,
-      "required": false,
+      "multiple": true,
+      "required": true,
       "types": [
         {
           "type": "colon",
+          "named": true
+        },
+        {
+          "type": "eq",
           "named": true
         }
       ]
@@ -773,6 +789,10 @@
           "named": true
         },
         {
+          "type": "eq",
+          "named": true
+        },
+        {
           "type": "let",
           "named": true
         }
@@ -855,6 +875,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "eq",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1151,6 +1181,11 @@
     }
   },
   {
+    "type": "void",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "\"",
     "named": false
   },
@@ -1164,10 +1199,6 @@
   },
   {
     "type": ",",
-    "named": false
-  },
-  {
-    "type": "=",
     "named": false
   },
   {
@@ -1221,6 +1252,10 @@
   {
     "type": "else",
     "named": false
+  },
+  {
+    "type": "eq",
+    "named": true
   },
   {
     "type": "false",
@@ -1308,6 +1343,10 @@
   },
   {
     "type": "typevar",
+    "named": false
+  },
+  {
+    "type": "void",
     "named": false
   },
   {
